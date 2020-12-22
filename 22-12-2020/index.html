@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gazzetter 20-12-2020 Vrunda</title>
+
+    <!--Bootstrap css Links-->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap/css/mdb.css">
+    <link rel="stylesheet" href="bootstrap/css/style.css">
+    <!--custom css link-->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--leaflet css link-->
+
+    <link rel="stylesheet" href="leaflet/leaflet.css">
+
+    <!--leaflet button-->
+    <link rel="stylesheet" href="leaflet/easy-button.css">
+
+    <!--fontAwesome Link-->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/57c17bb582.js" crossorigin="anonymous"></script>
+
+    <!--Animation Link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  </head>
+  <body>
+
+    <!--Navbar Start-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+      <img src="images/logo.jpg" width="50px" alt="" class="img_logo">
+      <a class="navbar-brand" href="#"><span class="logo_text"><h1>Gazzetter</h1> </span> </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" style="background-color: transparent;color: transparent;" aria-label="Toggle navigation">
+       
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          </ul>  
+          
+   
+    </nav>
+
+
+   <!--navbat End-->
+
+
+   <!--Map with Leaflet-->
+     <div id="map"></div>
+     <div class="row" >
+       <div class="col-12 text-right" style="z-index: 999">
+         <select id="selCountry" type="text"  class="custom-select"  style="width: 250px; z-index: 99;">
+            <option value="" disabled selected>Select country</option>
+       
+            </select>
+       </div>
+     </div>
+     <!--Modal -->
+     <!--Country Information-->
+   
+     <div class="container" mb-5>        
+      <div class="modal fade" id="countryInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" >
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Country Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="overflow : auto;">
+                <div class="container mt-2">
+                    <div class="row justify-content-between">
+                      <div class="mr-4"></div>
+                     <table border="1" class="table table-responsive d-table" id="example">
+                        <tbody>
+                          <tr><td>Flag</td><td><img id="flag"></td></tr>
+                           <tr><td>Country Name</td><td id="country_name"></td></tr>
+                           <tr><td>Capital </td><td id="capital"></td></tr>
+                           <tr><td>Population </td><td id="population"></td></tr>
+                           <tr><td>Area (km<sup>2</sup>)</td><td id="area"></td></tr>
+                           <tr><td>Languages:</td><td id="language"></td></tr>
+                           <tr><td>Region:</td><td id="region"></td></tr>
+                           <tr><td>Calling Code: </td><td id="calling_code"></td></tr>
+                        </tbody>
+                      </table>
+                    </div>                       
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                          
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="modal fade" id="wikiInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content" >
+            <div class="modal-header">
+              <h5 class="modal-title" id="wikiinfo">Wikipedia Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="overflow : auto;">
+                <div class="container mt-2">
+                    <div class="row justify-content-between">
+                      <div class="mr-4"></div>
+                     <table border="1" class="table table-responsive" id="example">
+                        <tbody>
+                           <tr>
+                            <td style="width: 30%"><img id="thumb1"></td><td id="sum1"></td>
+                           </tr>
+                           <tr>
+                            <td style="width: 30%"><img id="thumb2"></td><td id="sum2"></td>
+                           </tr>
+                           <tr>
+                            <td style="width: 30%"><img id="thumb3"></td><td id="sum3"></td>
+                           </tr>
+                           
+                          
+                        </tbody>
+                      </table>
+                    </div>                       
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                          
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="modal fade" id="weatherInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content" >
+            <div class="modal-header">
+              <h5 class="modal-title" id="weatherinfo">Weather Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="overflow : auto;">
+                <div class="container mt-2">
+                    <div class="row justify-content-between">
+                      <div class="mr-4"></div>
+                     <table border="1" class="table table-responsive d-table" id="example">
+                        <tbody>
+                           <tr><td>Feels Like<img id="wi"></td><td id="feels"></td></tr>
+                           <tr><td>Humidity</td><td id="humidity"></td></tr>
+                           <tr><td>Temp(F) </td><td>Min: <span id="min_temp"></span> Max.:<span id="max_temp"></span></td></tr>
+                           <tr><td>Windspeed </td><td id="windspeed"></td></tr>
+                           <tr><td>Description </td><td id="description"></td></tr>
+                           <tr><td>Pressure  </td><td id="pressure"></td></tr>
+                           
+                          
+                        </tbody>
+                      </table>
+                    </div>                       
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                          
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="modal fade" id="curInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content" >
+            <div class="modal-header">
+              <h5 class="modal-title" id="curinfo">Currency Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="overflow : auto;">
+                <div class="container mt-2">
+                    <div class="row justify-content-between">
+                      <div class="mr-4"></div>
+                     <table border="1" class="table table-responsive d-table" id="example">
+                        
+                           <tr><td style="border: 1px solid">Country Code</td><td style="border: 1px solid" id="cc"></td></tr>
+                           <tr><td style="border: 1px solid">Currency Symbol</td><td style="border: 1px solid" id="cs"></td></tr>
+                          
+                           <tr><td style="border: 1px solid">Exchange Rate </td><td style="border: 1px solid" id="er"></td></tr>
+                          
+                      </table>
+                    </div>                       
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                          
+            </div>
+          </div>
+        </div>  
+      </div>
+      <div class="modal fade" id="newsInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content" >
+            <div class="modal-header">
+              <h5 class="modal-title" id="newsinfo">Time Zone</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="overflow : auto;">
+                <div class="container mt-2">
+                    <div class="row justify-content-between">
+                      <div class="mr-4"></div>
+                     <table border="2" class="table table-responsive d-table"  id="example">
+                        
+                          <th colspan="2" class="text-center">TimeZone</th>
+                        
+                        <tbody>
+
+                           <tr style="border: 1px solid">
+                            <td id="country_code"></td><td id="timezone"></td>
+                           </tr>
+                           
+                           
+                          
+                        </tbody>
+                      </table>
+                    </div>                       
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                          
+            </div>
+          </div>
+        </div>  
+      </div>
+
+
+
+
+
+  <!--  JavaScript Sources -->
+  <!--jQuery first, then Popper.js, then Bootstrap JS-->
+  <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
+  <script src="bootstrap/js/popper.min.js"></script>
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <script src="bootstrap/js/mdb.js"></script>
+
+  <!--Leaflet js-->
+
+  <script src="leaflet/leaflet.js" type="text/javascript"></script>
+  <script src="leaflet/easy-button.js" type="text/javascript"></script>
+  <!--my app.js link-->
+  <script type="text/javascript" src="libs/js/app.js"></script>
+
+  </body>
+  </html>
